@@ -17,10 +17,9 @@ public class CustomerController {
         this.customerDataService = customerDataService;
     }
 
-
-    @GetMapping("/{id}")
-    public Optional<Customer> getCustomerById(@PathVariable Long id) {
-        return customerDataService.getCustomerById(id);
+    @GetMapping("")
+    public List<Customer> getAllCustomers() {
+        return customerDataService.getAllCustomers();
     }
 
     @GetMapping("")
@@ -33,6 +32,9 @@ public class CustomerController {
         customerDataService.deleteCustomerById(id);
         return  "Customer Deleted Successfully!";
     }
+
+    // Update the createCustomer method to return the created customer
+
 
     @PostMapping("")
     public Customer createCustomer(@RequestBody Customer customer) {

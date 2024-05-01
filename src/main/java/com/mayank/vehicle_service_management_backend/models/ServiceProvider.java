@@ -1,5 +1,6 @@
 package com.mayank.vehicle_service_management_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +17,8 @@ public class ServiceProvider {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long serviceProviderId;
     private String serviceProviderName;
+    @JsonIgnore
     @OneToMany
     private List<ServiceType> serviceType;
-    private String contactNumber;
+    private Long contactNumber;
 }

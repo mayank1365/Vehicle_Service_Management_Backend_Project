@@ -17,9 +17,8 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerId;
     private String name;
+    private long contactNumber;
     @OneToMany
     private List<Vehicle> vehicle;
-    @OneToMany
-    private List<ServiceRecord> serviceRecord;
 
 }
