@@ -22,9 +22,9 @@ public class CustomerController {
         return customerDataService.getAllCustomers();
     }
 
-    @GetMapping("")
-    public List<Customer> getAllCustomers() {
-        return customerDataService.getAllCustomers();
+    @GetMapping("/{id}")
+    public Customer getCustomerById(@PathVariable Long id) {
+        return customerDataService.getCustomerById(id);
     }
 
     @DeleteMapping("/{id}")

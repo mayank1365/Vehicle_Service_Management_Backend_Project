@@ -7,7 +7,7 @@ import java.util.Optional;
 
 
 public interface CustomerDataService {
-    public Optional<Customer> getCustomerById(Long id);
+    public Customer getCustomerById(Long id);
     public List<Customer> getAllCustomers();
     public void deleteCustomerById(Long id);
     public Customer createCustomer(Customer customer);
