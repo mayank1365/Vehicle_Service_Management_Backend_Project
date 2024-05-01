@@ -1,5 +1,7 @@
 package com.mayank.vehicle_service_management_backend.services;
 
+import com.mayank.vehicle_service_management_backend.exceptions.CustomerNotFoundException;
+import com.mayank.vehicle_service_management_backend.models.Customer;
 import com.mayank.vehicle_service_management_backend.models.Vehicle;
 import com.mayank.vehicle_service_management_backend.repositories.VehicleRepo;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,6 @@ public class VehicleServiceImpl implements VehicleService{
 
     @Override
     public Optional<Vehicle> getVehicleById(Long id) {
-
         return vehicleRepo.findById(id);
     }
 

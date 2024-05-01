@@ -4,6 +4,7 @@ import com.mayank.vehicle_service_management_backend.dtos.ExceptionDTO;
 import com.mayank.vehicle_service_management_backend.exceptions.CustomerListEmptyException;
 import com.mayank.vehicle_service_management_backend.exceptions.CustomerNotFoundException;
 import com.mayank.vehicle_service_management_backend.exceptions.CustomerAlreadyExistsException;
+import com.mayank.vehicle_service_management_backend.exceptions.VehicleNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,6 +34,14 @@ public class GlobalExceptionHandler {
         ExceptionDTO exceptionDTO = new ExceptionDTO();
         exceptionDTO.setMessage("something went wrong");
         exceptionDTO.setResolution("customer list is empty");
+        return new ResponseEntity<>(exceptionDTO, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(VehicleNotFoundException.class)
+    public ResponseEntity<ExceptionDTO> handleVehicleNotFoundException(VehicleNotFoundException exception){
+        ExceptionDTO exceptionDTO = new ExceptionDTO();
+        exceptionDTO.setMessage("something went wrong");
+        exceptionDTO.setResolution("vehicle not found");
         return new ResponseEntity<>(exceptionDTO, HttpStatus.CONFLICT);
     }
 
