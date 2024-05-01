@@ -18,7 +18,6 @@ public class ServiceRecord {
     @ManyToOne
     private Vehicle vehicle;
 
-
     @ManyToOne
     private ServiceType serviceType;
     private Date dateOfService;

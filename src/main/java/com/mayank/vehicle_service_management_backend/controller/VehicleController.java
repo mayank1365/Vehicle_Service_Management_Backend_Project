@@ -15,6 +15,7 @@ public class VehicleController {
     VehicleController(VehicleService vehicleService){
         this.vehicleService = vehicleService;
     }
+
     @GetMapping("/{id}")
     public Optional<Vehicle> getVehicleById(@PathVariable Long id) {
         return vehicleService.getVehicleById(id);

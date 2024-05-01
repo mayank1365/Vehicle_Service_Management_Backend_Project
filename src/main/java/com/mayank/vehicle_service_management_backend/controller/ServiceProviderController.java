@@ -1,5 +1,6 @@
 package com.mayank.vehicle_service_management_backend.controller;
 
+import com.mayank.vehicle_service_management_backend.dtos.ServiceProviderDTO;
 import com.mayank.vehicle_service_management_backend.models.ServiceProvider;
 import com.mayank.vehicle_service_management_backend.models.ServiceRecord;
 import com.mayank.vehicle_service_management_backend.repositories.VehicleRepo;
@@ -21,8 +22,15 @@ public class ServiceProviderController {
     }
 
     @GetMapping("/{id}")
-    public ServiceProvider getServiceProviderById(@PathVariable Long id) {
-        return serviceProviderService.getServiceProviderById(id).get();
+    public ServiceProviderDTO getServiceProviderById(@PathVariable Long id) {
+        ServiceProvider serviceProvider = serviceProviderService.getServiceProviderById(id).get();
+        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO();
+        serviceProviderDTO.setServiceProviderName(serviceProvider.getServiceProviderName());
+        serviceProviderDTO.setServiceType(serviceProvider.getServiceType());
+        serviceProviderDTO.setContactNumber(serviceProvider.getContactNumber());
+        return serviceProviderDTO;
+
+
     }
 
     @GetMapping("")

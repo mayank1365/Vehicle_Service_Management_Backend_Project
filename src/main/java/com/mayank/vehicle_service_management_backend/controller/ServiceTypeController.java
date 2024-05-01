@@ -18,9 +18,7 @@ public class ServiceTypeController {
 
     @GetMapping
     public List<ServiceType> getAllServiceTypes() {
-
         return serviceTypeService.getAllServiceTypes();
-
     }
 
     @DeleteMapping("/{id}")

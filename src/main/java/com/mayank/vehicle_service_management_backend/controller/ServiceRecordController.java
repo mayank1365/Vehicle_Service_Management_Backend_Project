@@ -1,5 +1,6 @@
 package com.mayank.vehicle_service_management_backend.controller;
 
+import com.mayank.vehicle_service_management_backend.dtos.ServiceRecordDTO;
 import com.mayank.vehicle_service_management_backend.models.ServiceRecord;
 import com.mayank.vehicle_service_management_backend.services.ServiceRecordService;
 
@@ -19,8 +20,19 @@ public class ServiceRecordController {
     }
 
     @GetMapping("/{id}")
-    public Optional<ServiceRecord> getServiceRecordById(@PathVariable Long id) {
-        return serviceRecordService.getServiceRecordById(id);
+    public Optional<ServiceRecordDTO> getServiceRecordById(@PathVariable Long id) {
+
+        Optional<ServiceRecord> serviceRecord = serviceRecordService.getServiceRecordById(id);
+        if(serviceRecord.isPresent()){
+            ServiceRecordDTO serviceRecordDTO = new ServiceRecordDTO();
+            serviceRecordDTO.setServiceRecordId(serviceRecord.get().getServiceRecordId());
+            serviceRecordDTO.setVehicle(serviceRecord.get().getVehicle());
+            serviceRecordDTO.setServiceType(serviceRecord.get().getServiceType());
+            serviceRecordDTO.setDateOfService(serviceRecord.get().getDateOfService());
+            serviceRecordDTO.setServiceStatus(serviceRecord.get().getServiceStatus());
+            return Optional.of(serviceRecordDTO);
+        }
+        return Optional.empty();
     }
 
     @GetMapping("")

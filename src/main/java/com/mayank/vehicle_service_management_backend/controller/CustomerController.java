@@ -1,5 +1,7 @@
 package com.mayank.vehicle_service_management_backend.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mayank.vehicle_service_management_backend.dtos.CustomerDTO;
 import com.mayank.vehicle_service_management_backend.models.Customer;
 import com.mayank.vehicle_service_management_backend.services.CustomerDataService;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +25,13 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable Long id) {
-        return customerDataService.getCustomerById(id);
+    public CustomerDTO getCustomerById(@PathVariable Long id) {
+        Customer customer = customerDataService.getCustomerById(id);
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setName(customer.getName());
+        customerDTO.setContactNumber(customer.getContactNumber());
+        customerDTO.setVehicle(customer.getVehicle());
+        return customerDTO;
     }
 
     @DeleteMapping("/{id}")
