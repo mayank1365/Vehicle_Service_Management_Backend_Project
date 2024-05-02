@@ -12,7 +12,6 @@ public interface VehicleRepo extends JpaRepository<Vehicle, Long> {
     Vehicle save(Vehicle vehicle);
     @Override
     void deleteById(Long id);
-
     @Override
     Optional<Vehicle> findById(Long id);
 

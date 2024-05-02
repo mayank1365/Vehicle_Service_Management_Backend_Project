@@ -14,25 +14,13 @@ import java.util.Optional;
 public class ServiceRecordController {
 
     private final ServiceRecordService serviceRecordService;
-
     public ServiceRecordController(ServiceRecordService serviceRecordService){
         this.serviceRecordService = serviceRecordService;
     }
 
     @GetMapping("/{id}")
-    public Optional<ServiceRecordDTO> getServiceRecordById(@PathVariable Long id) {
-
-        Optional<ServiceRecord> serviceRecord = serviceRecordService.getServiceRecordById(id);
-        if(serviceRecord.isPresent()){
-            ServiceRecordDTO serviceRecordDTO = new ServiceRecordDTO();
-            serviceRecordDTO.setServiceRecordId(serviceRecord.get().getServiceRecordId());
-            serviceRecordDTO.setVehicle(serviceRecord.get().getVehicle());
-            serviceRecordDTO.setServiceType(serviceRecord.get().getServiceType());
-            serviceRecordDTO.setDateOfService(serviceRecord.get().getDateOfService());
-            serviceRecordDTO.setServiceStatus(serviceRecord.get().getServiceStatus());
-            return Optional.of(serviceRecordDTO);
-        }
-        return Optional.empty();
+    public Optional<ServiceRecord> getServiceRecordById(@PathVariable Long id) {
+        return serviceRecordService.getServiceRecordById(id);
     }
 
     @GetMapping("")
@@ -49,6 +37,11 @@ public class ServiceRecordController {
     @PostMapping("")
     public ServiceRecord createServiceRecord(@RequestBody ServiceRecord serviceRecord) {
         return serviceRecordService.createServiceRecord(serviceRecord);
+    }
+
+    @PutMapping("")
+    public Optional<ServiceRecord> updateServiceRecord(@RequestBody ServiceRecord serviceRecord) {
+        return serviceRecordService.updateServiceRecord(serviceRecord);
     }
 
 }

@@ -5,6 +5,7 @@ import com.mayank.vehicle_service_management_backend.repositories.ServiceTypeRep
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceTypeServiceImpl implements ServiceTypeService{
@@ -28,4 +29,14 @@ public class ServiceTypeServiceImpl implements ServiceTypeService{
     public ServiceType createServiceType(ServiceType serviceType) {
         return serviceTypeRepo.save(serviceType);
     }
+    @Override
+    public Optional<ServiceType> updateServiceType(ServiceType serviceType) {
+        Optional<ServiceType> existingSystemType = serviceTypeRepo.findById(serviceType.getServiceTypeId());
+        if (existingSystemType.isEmpty()) {
+            throw new RuntimeException("ServiceType with id " + serviceType.getServiceTypeId() + " not found");
+        }
+        serviceTypeRepo.save(serviceType);
+        return Optional.of(serviceType);
+    }
+
 }

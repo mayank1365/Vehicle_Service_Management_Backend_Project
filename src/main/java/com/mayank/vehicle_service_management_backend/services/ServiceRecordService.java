@@ -10,4 +10,5 @@ public interface ServiceRecordService {
     public List<ServiceRecord> getAllServiceRecords();
     public void deleteServiceRecordById(Long id);
     public ServiceRecord createServiceRecord(ServiceRecord serviceRecord);
+    Optional<ServiceRecord> updateServiceRecord(ServiceRecord serviceRecord);
 }

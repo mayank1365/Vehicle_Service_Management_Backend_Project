@@ -1,10 +1,7 @@
 package com.mayank.vehicle_service_management_backend.exceptionhandlers;
 
 import com.mayank.vehicle_service_management_backend.dtos.ExceptionDTO;
-import com.mayank.vehicle_service_management_backend.exceptions.CustomerListEmptyException;
-import com.mayank.vehicle_service_management_backend.exceptions.CustomerNotFoundException;
-import com.mayank.vehicle_service_management_backend.exceptions.CustomerAlreadyExistsException;
-import com.mayank.vehicle_service_management_backend.exceptions.VehicleNotFoundException;
+import com.mayank.vehicle_service_management_backend.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -52,6 +49,16 @@ public class GlobalExceptionHandler {
         dto.setMessage("something went wrong");
         ResponseEntity<ExceptionDTO> response = new ResponseEntity<>(dto , HttpStatus.BAD_REQUEST);
         return response;
+    }
+
+
+    //owner mismatch exception
+    @ExceptionHandler(OwnerMismatchException.class)
+    public ResponseEntity<ExceptionDTO> handleOwnerMismatchException(OwnerMismatchException exception){
+        ExceptionDTO exceptionDTO = new ExceptionDTO();
+        exceptionDTO.setMessage("something went wrong");
+        exceptionDTO.setResolution("owner mismatch");
+        return new ResponseEntity<>(exceptionDTO, HttpStatus.CONFLICT);
     }
 
 }

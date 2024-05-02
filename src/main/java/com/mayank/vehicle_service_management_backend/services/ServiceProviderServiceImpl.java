@@ -35,4 +35,10 @@ public class ServiceProviderServiceImpl implements ServiceProviderService{
     public ServiceProvider createServiceProvider(ServiceProvider serviceProvider) {
         return serviceProviderRepo.save(serviceProvider);
     }
+    @Override
+    public Optional<ServiceProvider> updateServiceProvider(ServiceProvider serviceProvider) {
+        Optional<ServiceProvider> existingServiceProvider = getServiceProviderById(serviceProvider.getServiceProviderId());
+        serviceProviderRepo.save(serviceProvider);
+        return Optional.of(serviceProvider);
+    }
 }

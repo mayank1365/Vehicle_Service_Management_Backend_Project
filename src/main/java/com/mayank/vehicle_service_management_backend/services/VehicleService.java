@@ -1,13 +1,17 @@
 package com.mayank.vehicle_service_management_backend.services;
 
+import com.mayank.vehicle_service_management_backend.models.ServiceRecord;
 import com.mayank.vehicle_service_management_backend.models.Vehicle;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface VehicleService {
-    public Vehicle createVehicle(Vehicle vehicle);
-    public List<Vehicle> getAllVehicles();
-    public Optional<Vehicle> getVehicleById(Long id);
-    public void deleteVehicleById(Long id);
+    Vehicle createVehicle(Vehicle vehicle);
+    List<Vehicle> getAllVehicles();
+    Optional<Vehicle> getVehicleById(Long id);
+    void deleteVehicleById(Long id);
+    Optional<Vehicle> updateVehicle(Vehicle vehicle);
+    Optional<Vehicle> addRecord(Long id, ServiceRecord serviceRecord);
+
 }

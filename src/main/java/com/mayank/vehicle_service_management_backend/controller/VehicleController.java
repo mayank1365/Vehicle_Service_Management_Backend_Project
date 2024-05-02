@@ -10,7 +10,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/vehicle")
 public class VehicleController {
-
     private final VehicleService vehicleService;
     VehicleController(VehicleService vehicleService){
         this.vehicleService = vehicleService;
@@ -36,4 +35,11 @@ public class VehicleController {
     public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
         return vehicleService.createVehicle(vehicle);
     }
+
+    @PutMapping("")
+    public Optional<Vehicle> updateVehicle(@RequestBody Vehicle vehicle) {
+        return vehicleService.updateVehicle(vehicle);
+    }
+
+
 }

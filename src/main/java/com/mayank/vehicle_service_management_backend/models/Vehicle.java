@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -17,10 +18,20 @@ public class Vehicle {
 
     private String company;
     private String model;
-    private String year;
-
-    @JsonIgnore
+    private Date year;
+    @ManyToOne
+    private Customer owner;
     @OneToMany
     private List<ServiceRecord> serviceRecord;
 
 }
+//
+//{
+//        "company": "hoso",
+//        "model": "M2",
+//        "year": "2023-08-04T12:00:00.000Z",
+//        "owner": 2,
+//        "serviceRecord": {
+//
+//        }
+//        }

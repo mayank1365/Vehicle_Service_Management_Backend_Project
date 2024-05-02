@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 
 public class ServiceProviderDTO {
-//    private Long serviceProviderId;
+
     private String serviceProviderName;
     private List<ServiceType> serviceType;
     private Long contactNumber;

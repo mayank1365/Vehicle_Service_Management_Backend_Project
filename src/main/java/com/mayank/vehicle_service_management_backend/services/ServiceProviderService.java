@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ServiceProviderService {
-    public Optional<ServiceProvider> getServiceProviderById(Long id);
-    public List<ServiceProvider> getAllServiceProviders();
-    public void deleteServiceProviderById(Long id);
-    public ServiceProvider createServiceProvider(ServiceProvider serviceProvider);
+    Optional<ServiceProvider> getServiceProviderById(Long id);
+    List<ServiceProvider> getAllServiceProviders();
+    void deleteServiceProviderById(Long id);
+    ServiceProvider createServiceProvider(ServiceProvider serviceProvider);
+    Optional<ServiceProvider> updateServiceProvider(ServiceProvider serviceProvider);
 }

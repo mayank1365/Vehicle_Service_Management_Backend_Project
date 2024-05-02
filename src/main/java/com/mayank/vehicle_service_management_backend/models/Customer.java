@@ -14,10 +14,11 @@ import java.util.List;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerId;
     private String name;
-    private long contactNumber;
+    private String licenseId;
+    private long contactNo;
     @OneToMany
     private List<Vehicle> vehicle;
 

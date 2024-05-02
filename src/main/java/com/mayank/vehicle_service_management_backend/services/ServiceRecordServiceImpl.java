@@ -34,4 +34,10 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
     public ServiceRecord createServiceRecord(ServiceRecord serviceRecord) {
         return serviceRecordRepo.save(serviceRecord);
     }
+    @Override
+    public Optional<ServiceRecord> updateServiceRecord(ServiceRecord serviceRecord) {
+        Optional<ServiceRecord> existingServiceRecord = getServiceRecordById(serviceRecord.getServiceRecordId());
+        serviceRecordRepo.save(serviceRecord);
+        return Optional.of(serviceRecord);
+    }
 }

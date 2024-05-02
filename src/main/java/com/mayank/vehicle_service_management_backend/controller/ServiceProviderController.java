@@ -8,6 +8,7 @@ import com.mayank.vehicle_service_management_backend.services.ServiceProviderSer
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/service-provider")
@@ -22,15 +23,8 @@ public class ServiceProviderController {
     }
 
     @GetMapping("/{id}")
-    public ServiceProviderDTO getServiceProviderById(@PathVariable Long id) {
-        ServiceProvider serviceProvider = serviceProviderService.getServiceProviderById(id).get();
-        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO();
-        serviceProviderDTO.setServiceProviderName(serviceProvider.getServiceProviderName());
-        serviceProviderDTO.setServiceType(serviceProvider.getServiceType());
-        serviceProviderDTO.setContactNumber(serviceProvider.getContactNumber());
-        return serviceProviderDTO;
-
-
+    public ServiceProvider getServiceProviderById(@PathVariable Long id) {
+        return serviceProviderService.getServiceProviderById(id).get();
     }
 
     @GetMapping("")
@@ -47,6 +41,11 @@ public class ServiceProviderController {
     @PostMapping("")
     public ServiceProvider createServiceProvider(@RequestBody ServiceProvider serviceProvider) {
         return serviceProviderService.createServiceProvider(serviceProvider);
+    }
+
+    @PutMapping("")
+    public Optional<ServiceProvider> updateServiceProvider(@RequestBody ServiceProvider serviceProvider) {
+        return serviceProviderService.updateServiceProvider(serviceProvider);
     }
 
 }

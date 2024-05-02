@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class CustomerDataServiceImpl implements CustomerDataService{
 
@@ -18,21 +19,17 @@ public class CustomerDataServiceImpl implements CustomerDataService{
         this.customerDataRepo = customerDataRepo;
     }
     @Override
-    public Customer getCustomerById(Long id) {
-        Optional<Customer> optionalCustomer = customerDataRepo.findById(id);
-        if (optionalCustomer.isEmpty()) {
-            throw new CustomerNotFoundException("User not found");
+    public Optional<Customer> getCustomerById(Long id) {
+        Optional<Customer> existingCustomer = customerDataRepo.findById(id);
+        if (existingCustomer.isEmpty()) {
+            throw new CustomerNotFoundException("Customer with id " + id + " not found");
         }
-        return optionalCustomer.get();
+        return existingCustomer;
     }
 
     @Override
     public List<Customer> getAllCustomers() {
-        List<Customer> optionalCustomers = customerDataRepo.findAll();
-        if(optionalCustomers.isEmpty()){
-            throw new CustomerListEmptyException("customer list is empty");
-        }
-        return optionalCustomers;
+        return customerDataRepo.findAll();
     }
 
     @Override
@@ -42,12 +39,14 @@ public class CustomerDataServiceImpl implements CustomerDataService{
 
     @Override
     public Customer createCustomer(Customer customer) {
-        Optional<Customer> optionalCustomer = customerDataRepo.findCustomerByContactNumber(customer.getContactNumber());
-        if (optionalCustomer.isPresent()) {
-            throw new CustomerAlreadyExistsException("User already exists");
-        }
         return customerDataRepo.save(customer);
     }
 
-
+    @Override
+    public Optional<Customer> updateCustomer(Customer customer) {
+        Optional<Customer> existingCustomer = getCustomerById(customer.getCustomerId());
+        customerDataRepo.save(customer);
+        return Optional.of(customer);
+    }
 }
+
