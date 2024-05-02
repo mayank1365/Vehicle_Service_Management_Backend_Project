@@ -1,6 +1,8 @@
 package com.mayank.vehicle_service_management_backend.services;
 
 
+import com.mayank.vehicle_service_management_backend.exceptions.ServiceRecordListEmptyException;
+import com.mayank.vehicle_service_management_backend.exceptions.ServiceRecordNotFoundException;
 import com.mayank.vehicle_service_management_backend.models.ServiceRecord;
 import com.mayank.vehicle_service_management_backend.repositories.ServiceRecordRepo;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,20 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
     }
     @Override
     public Optional<ServiceRecord> getServiceRecordById(Long id) {
-        return serviceRecordRepo.findById(id);
+        Optional<ServiceRecord> optionalServiceRecord = serviceRecordRepo.findById(id);
+        if (optionalServiceRecord.isEmpty()) {
+            throw new ServiceRecordNotFoundException("Service Record not Found");
+        }
+        return optionalServiceRecord;
     }
 
     @Override
     public List<ServiceRecord> getAllServiceRecords() {
-        return serviceRecordRepo.findAll();
+        List<ServiceRecord> serviceRecords = serviceRecordRepo.findAll();
+        if (serviceRecords.isEmpty()) {
+            throw new ServiceRecordListEmptyException("Service list is empty");
+        }
+        return serviceRecords;
     }
 
     @Override

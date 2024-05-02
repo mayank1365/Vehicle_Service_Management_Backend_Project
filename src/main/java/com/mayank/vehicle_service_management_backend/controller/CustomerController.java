@@ -44,5 +44,4 @@ public class CustomerController {
     public Optional<Customer> updateCustomer(@RequestBody Customer customer) {
         return customerDataService.updateCustomer(customer);
     }
-
 }

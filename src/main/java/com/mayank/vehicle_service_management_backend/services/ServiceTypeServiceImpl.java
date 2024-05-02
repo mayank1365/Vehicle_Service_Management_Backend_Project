@@ -1,5 +1,7 @@
 package com.mayank.vehicle_service_management_backend.services;
 
+import com.mayank.vehicle_service_management_backend.exceptions.ServiceTypeAlreadyExistsException;
+import com.mayank.vehicle_service_management_backend.exceptions.ServiceTypeListEmptyException;
 import com.mayank.vehicle_service_management_backend.models.ServiceType;
 import com.mayank.vehicle_service_management_backend.repositories.ServiceTypeRepo;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,11 @@ public class ServiceTypeServiceImpl implements ServiceTypeService{
 
     @Override
     public List<ServiceType> getAllServiceTypes() {
-        return serviceTypeRepo.findAll();
+        List<ServiceType> serviceTypes = serviceTypeRepo.findAll();
+        if (serviceTypes.isEmpty()) {
+            throw new ServiceTypeListEmptyException("Service Type list is empty");
+        }
+        return serviceTypes;
     }
 
     @Override
@@ -27,6 +33,10 @@ public class ServiceTypeServiceImpl implements ServiceTypeService{
 
     @Override
     public ServiceType createServiceType(ServiceType serviceType) {
+        Optional<ServiceType> optionalServiceType = serviceTypeRepo.findServiceTypeByServiceTypeName(serviceType.getServiceTypeName());
+        if (optionalServiceType.isPresent()) {
+            throw new ServiceTypeAlreadyExistsException("Service Type already exists");
+        }
         return serviceTypeRepo.save(serviceType);
     }
     @Override

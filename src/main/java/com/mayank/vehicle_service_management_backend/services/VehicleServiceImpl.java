@@ -2,6 +2,8 @@ package com.mayank.vehicle_service_management_backend.services;
 
 import com.mayank.vehicle_service_management_backend.exceptions.CustomerNotFoundException;
 import com.mayank.vehicle_service_management_backend.exceptions.OwnerMismatchException;
+import com.mayank.vehicle_service_management_backend.exceptions.VehicleListEmptyException;
+import com.mayank.vehicle_service_management_backend.exceptions.VehicleNotFoundException;
 import com.mayank.vehicle_service_management_backend.models.Customer;
 import com.mayank.vehicle_service_management_backend.models.ServiceRecord;
 import com.mayank.vehicle_service_management_backend.models.Vehicle;
@@ -27,12 +29,21 @@ public class VehicleServiceImpl implements VehicleService{
 
     @Override
     public List<Vehicle> getAllVehicles() {
-        return vehicleRepo.findAll();
+        List<Vehicle> vehicles = vehicleRepo.findAll();
+        if (vehicles.isEmpty()) {
+            throw new VehicleListEmptyException("Vehicle list is empty");
+        }
+        return vehicles;
     }
 
     @Override
     public Optional<Vehicle> getVehicleById(Long id) {
-        return vehicleRepo.findById(id);
+        Optional<Vehicle> optionalVehicle = vehicleRepo.findById(id);
+        if (optionalVehicle.isEmpty()) {
+            throw new VehicleNotFoundException("Vehicle not found");
+        }
+
+        return optionalVehicle;
     }
 
     @Override
@@ -43,6 +54,10 @@ public class VehicleServiceImpl implements VehicleService{
     @Override
     public Optional<Vehicle> updateVehicle(Vehicle vehicle) {
         Optional<Vehicle> existingVehicle = getVehicleById(vehicle.getVehicleId());
+        if (existingVehicle.isEmpty()) {
+            throw new VehicleNotFoundException("Vehicle not found");
+        }
+
         if(vehicle.getOwner() != existingVehicle.get().getOwner()) {
             throw new OwnerMismatchException("Owner cannot be changed!!");
         }

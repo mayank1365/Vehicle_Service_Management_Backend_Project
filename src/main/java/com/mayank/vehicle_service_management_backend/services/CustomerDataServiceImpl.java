@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 @Service
-public class CustomerDataServiceImpl implements CustomerDataService{
+public class CustomerDataServiceImpl implements CustomerDataService {
 
     private CustomerDataRepo customerDataRepo;
     CustomerDataServiceImpl(CustomerDataRepo customerDataRepo){
@@ -29,7 +29,13 @@ public class CustomerDataServiceImpl implements CustomerDataService{
 
     @Override
     public List<Customer> getAllCustomers() {
-        return customerDataRepo.findAll();
+        List<Customer> customers = customerDataRepo.findAll();
+
+        if (customers.isEmpty()) {
+            throw new CustomerListEmptyException("Customer list is empty");
+        }
+
+        return customers;
     }
 
     @Override
@@ -39,6 +45,10 @@ public class CustomerDataServiceImpl implements CustomerDataService{
 
     @Override
     public Customer createCustomer(Customer customer) {
+        Optional<Customer> optionalCustomer = customerDataRepo.findCustomerByContactNo(customer.getContactNo());
+        if (optionalCustomer.isPresent()) {
+            throw new CustomerAlreadyExistsException("Customer already exists.");
+        }
         return customerDataRepo.save(customer);
     }
 
@@ -49,4 +59,3 @@ public class CustomerDataServiceImpl implements CustomerDataService{
         return Optional.of(customer);
     }
 }
-

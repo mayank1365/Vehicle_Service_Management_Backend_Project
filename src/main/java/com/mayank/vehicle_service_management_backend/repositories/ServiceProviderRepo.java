@@ -17,4 +17,6 @@ public interface ServiceProviderRepo extends JpaRepository<ServiceProvider, Long
 
     @Override
     Optional<ServiceProvider> findById(Long id);
+
+    Optional<ServiceProvider> findServiceProvidersByContactNumber(Long contactNo);
 }

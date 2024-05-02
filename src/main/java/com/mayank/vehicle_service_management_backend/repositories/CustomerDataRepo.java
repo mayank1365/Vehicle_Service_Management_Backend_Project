@@ -13,8 +13,10 @@ public interface CustomerDataRepo extends JpaRepository<Customer, Long> {
 
     @Override
     Optional<Customer> findById(Long id);
-    Optional<Customer> findCustomerByContactNumber(Long contactNumber);
 
+    //Optional<Customer> findCustomerByContactNumber(Long contactNumber);
     @Override
     void deleteById(Long id);
+
+    Optional<Customer> findCustomerByContactNo(long contactNo);
 }
