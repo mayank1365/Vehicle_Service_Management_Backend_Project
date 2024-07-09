@@ -14,8 +14,10 @@ This project is a backend application for managing vehicle services. It is built
 
 ## Features
 <hr>
-* *Spring Data JPA:* Implements Spring Data JPA repositories for database operations.
-* *Web Interface:* Provides a web interface accessible through Tomcat server.
+
+* Spring Data JPA: Implements Spring Data JPA repositories for database operations.
+
+* Web Interface: Provides a web interface accessible through Tomcat server.
 
 ## Table of Contents
 <hr>
