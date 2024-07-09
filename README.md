@@ -21,6 +21,7 @@ This project is a backend application for managing vehicle services. It is built
 
 ## Table of Contents
 <hr>
+
 - [Installation and Setup](#installation-and-setup)
 - [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
